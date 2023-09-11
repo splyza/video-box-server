@@ -77,7 +77,7 @@ response:
 ```
 
 ### Get video activity
-``` GET videos/:videoId/activity ```
+``` GET /videos/:videoId/activity ```
 
 response:
 ```
@@ -125,7 +125,7 @@ response:
 
 response:
 ```
-// VideoAcitivty
+// VideoActivity
 [{
     id: string,
     video: Video,
