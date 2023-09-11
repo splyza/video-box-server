@@ -41,7 +41,6 @@ response:
 
 response json:
 ```
-// Video
 [{
   id: string,
   title: string,
@@ -65,7 +64,6 @@ response json:
 
 response:
 ```
-// Video
 {
   id: string,
   title: string,
@@ -81,7 +79,6 @@ response:
 
 response:
 ```
-// VideoAcitivty
 [{
     id: string,
     video: Video,
@@ -125,7 +122,6 @@ response:
 
 response:
 ```
-// VideoActivity
 [{
     id: string,
     video: Video,
