@@ -51,6 +51,21 @@ response json:
 }]
 ```
 
+### Get logged in user video
+```GET /videos/:videoId```
+
+response json:
+```
+{
+  id: string,
+  title: string,
+  description: string,
+  createdDate: string, // iso date string
+  author: User,
+  url: string
+}
+```
+
 ### Update video properties
 ```PATCH /videos/:videoId```
 
