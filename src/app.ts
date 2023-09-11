@@ -12,6 +12,7 @@ import { UserDbService } from './db/users-db-service';
 import { VideoActivityDbService } from './db/video-activity-db-service';
 import { MODEL_FACTORY as ModelFactory } from './model-factory';
 import { RESOURCE_FACTORY as ResourceFactory } from './resource-factory'; 
+import { simulateDelay } from './helpers';
 
 const app = express();
 app.use(express.json({limit: '50mb'}));
@@ -51,7 +52,29 @@ app.get('/videos', (req, res) => {
             item.url
         ));
     }
-    res.send(results);
+
+    simulateDelay(() => {
+        res.send(results);
+    });
+});
+
+app.get('/videos/:videoId', (req, res) => {
+    const videoId = req.params.videoId;
+
+    const videosData = videoService.getVideos();
+    const foundIndex = videosData.findIndex(t => t.id === videoId);
+    const videoResource = videosData[foundIndex];
+
+    if (!videoResource) {
+        res.status(404).send();
+        return;
+    }
+
+    const result = ModelFactory.videoResourceToVideo(videoResource, userService);
+
+    simulateDelay(() => {
+        res.send(result);
+    });
 });
 
 app.patch('/videos/:videoId', (req, res) => {
@@ -166,7 +189,3 @@ app.post('/videos/:videoId/activity', (req, res) => {
 
     res.send(results);
 });
-
-
-
-

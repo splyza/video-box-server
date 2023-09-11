@@ -20,3 +20,23 @@ export function createImageFromDataUrl(dataUri: string, fileName: string): strin
     fs.writeFileSync(fullPath, buf);
     return `images/activity/${fileName}.png`;
 }
+
+export function simulateDelay(callback: Function) {
+    const times = [
+        0,
+        100,
+        300,
+        400,
+        1000,
+        3000,
+        4000
+    ];
+    const delayTime = times[getRandomBetween(0, times.length - 1)];
+    setTimeout(() => {
+        callback();
+    }, delayTime);
+}
+
+export function getRandomBetween(min: number, max: number) {
+  return Math.round(Math.random() * (max - min) + min);
+}
