@@ -36,7 +36,7 @@ response:
 }
 ```
 
-### Get the list of videos owned by the current logged in user
+### Get the list of videos
 ```GET /videos```
 
 response json:
@@ -44,14 +44,12 @@ response json:
 [{
   id: string,
   title: string,
-  description: string,
   createdDate: string, // iso date string
-  author: User,
-  url: string
+  author: User
 }]
 ```
 
-### Get logged in user video
+### Get the details of a particular video
 ```GET /videos/:videoId```
 
 response json:
@@ -89,8 +87,8 @@ response:
 }
 ```
 
-### Get video activity
-``` GET /videos/:videoId/activity ```
+### Get video reactions
+``` GET /videos/:videoId/reactions ```
 
 response:
 ```
@@ -98,29 +96,30 @@ response:
     id: string,
     video: Video,
     author: User,
-    type: 'like',
-    postedDate: string // iso date string
+    type: 'star',
+    postedDate: string, // iso date string
+    timeframe: number // seconds
 }, {
     id: string,
     video: Video,
     author: User,
     type: 'snapshot',
     createdDate: string, // iso date string
-    timeframe: number, // seconds,
+    timeframe: number, // seconds
     imageUrl: string
 }]
 ```
 
-### Add new video activity to a video
-``` POST /videos/:videoId/activity ```
+### Add new video reaction to an existing video
+``` POST /videos/:videoId/reactions ```
 
 (body) json payload:
 ```
-// for like
+// for star
 {
     videoId: string;
-    authorId: string;
-    type: 'like';
+    type: 'star';
+    timeframe: number; // seconds
 }
 ```
 
@@ -128,7 +127,6 @@ response:
 // for snapshot
 {
     videoId: string;
-    authorId: string;
     type: 'snapshot';
     timeframe: number; // seconds
     dataUri: string; // base 64 image data // sample: "data:image/png;base64,iVBORw0K=="
@@ -141,14 +139,15 @@ response:
     id: string,
     video: Video,
     author: User,
-    type: 'like',
-    postedDate: string // iso date string
+    type: 'star',
+    postedDate: string, // iso date string
+    timeframe: number, // seconds
 }, {
     id: string,
     video: Video,
     author: User,
     type: 'snapshot',
     createdDate: string, // iso date string
-    timeframe: number, // seconds,
+    timeframe: number, // seconds
     imageUrl: string
 }]

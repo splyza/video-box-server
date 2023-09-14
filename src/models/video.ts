@@ -12,3 +12,5 @@ export class Video {
         // ..
     }
 }
+
+export type VideoPreview = Omit<Video, 'url' | 'description'>;

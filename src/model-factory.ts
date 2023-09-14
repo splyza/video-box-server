@@ -2,18 +2,18 @@ import { LOGGED_IN_USER } from "./config";
 import { UserDbService } from "./db/users-db-service";
 import { User } from "./models/user";
 import { Video } from "./models/video";
-import { VideoActivity, VideoActivityLike, VideoActivitySnapshot } from "./models/video-activity";
+import { VideoReaction, VideoReactionStar, VideoReactionSnapshot, VideoReactionType } from "./models/video-reaction";
 import { UserResource } from "./resources/user";
 import { VideoResource } from "./resources/video";
-import { VideoActivityResource, VideoActivityLikeResource, VideoActivitySnapshotResource } from "./resources/video-activity";
+import { VideoReactionResource, VideoReactionStarResource, VideoReactionSnapshotResource } from "./resources/video-reaction";
 
 class ModelFactory {
 
-    public videoActivityResourceToVideoActivity(
-        activitiesData: Array<VideoActivityResource>,
+    public videoReactionResourceToVideoReaction(
+        activitiesData: Array<VideoReactionResource>,
         videoData: VideoResource,
         authorsData: Array<UserResource>
-    ): Array<VideoActivity> {
+    ): Array<VideoReaction> {
         const video = new Video(
             videoData.id,
             videoData.title,
@@ -23,7 +23,7 @@ class ModelFactory {
             videoData.url
         );
     
-        const results = new Array<VideoActivity>();
+        const results = new Array<VideoReaction>();
         for ( let item of activitiesData ) {
             const authorResource = authorsData.find( t => t.id == item.authorId )!;
             const author = new User(
@@ -31,17 +31,18 @@ class ModelFactory {
                 authorResource.name,
                 authorResource.pictureUrl
             )
-            if ( item.type === 'like' ) {
-                const like = item as VideoActivityLikeResource;
-                results.push(new VideoActivityLike(
-                    like!.id,
+            if ( item.type === VideoReactionType.star ) {
+                const star = item as VideoReactionStarResource;
+                results.push(new VideoReactionStar(
+                    star!.id,
                     video,
                     author,
-                    like!.postedDate
+                    star!.postedDate,
+                    star!.timeframe
                 ));
             } else {
-                const snapshot = item as VideoActivitySnapshotResource;
-                results.push(new VideoActivitySnapshot(
+                const snapshot = item as VideoReactionSnapshotResource;
+                results.push(new VideoReactionSnapshot(
                     snapshot.id,
                     video,
                     author,

@@ -2,14 +2,13 @@ import * as express from 'express';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
 import { LOGGED_IN_USER } from './config';
-import { User } from './models/user';
-import { Video } from './models/video';
-import { VideoActivityResource } from './resources/video-activity';
-import { VideoActivityPostRequest } from './requests/video-activity-post';
+import { VideoPreview } from './models/video';
+import { VideoReactionResource } from './resources/video-reaction';
+import { VideoReactionPostRequest } from './requests/video-reaction-post';
 import { VideoPatchRequest } from './requests/video-patch';
 import { VideoDbService } from './db/video-db-service';
 import { UserDbService } from './db/users-db-service';
-import { VideoActivityDbService } from './db/video-activity-db-service';
+import { VideoReactionDbService } from './db/video-reaction-db-service';
 import { MODEL_FACTORY as ModelFactory } from './model-factory';
 import { RESOURCE_FACTORY as ResourceFactory } from './resource-factory'; 
 import { simulateDelay } from './helpers';
@@ -22,7 +21,7 @@ app.use(bodyParser.json({limit: '50mb'}));
 const PORT = process.env.PORT || 3000;
 const videoService = new VideoDbService();
 const userService = new UserDbService();
-const videoActivityService = new VideoActivityDbService();
+const videoReactionService = new VideoReactionDbService();
 
 app.listen(PORT, () => {
     console.log("Server Listening on PORT:", PORT);
@@ -40,17 +39,17 @@ app.get('/users/self', (req, res) => {
 });
 
 app.get('/videos', (req, res) => {
+
     const videoResources = videoService.getVideos();
-    const results = new Array<Video>();
+    const results = new Array<VideoPreview>();
+
     for ( let item of videoResources ) {
-        results.push(new Video(
-            item.id,
-            item.title,
-            item.description,
-            item.createdDate,
-            LOGGED_IN_USER,
-            item.url
-        ));
+        results.push({
+            id: item.id,
+            title: item.title,
+            createdDate: item.createdDate,
+            author: LOGGED_IN_USER
+        });
     }
 
     simulateDelay(() => {
@@ -116,7 +115,7 @@ app.patch('/videos/:videoId', (req, res) => {
     res.send(result);
 });
 
-app.get('/videos/:videoId/activity', (req, res) => {
+app.get('/videos/:videoId/reactions', (req, res) => {
     const videoId = req.params.videoId;
 
     const videoResources = videoService.getVideos();
@@ -127,11 +126,11 @@ app.get('/videos/:videoId/activity', (req, res) => {
         return;
     }
 
-    const _activitiesData = videoActivityService.getVideoActivities();
+    const _activitiesData = videoReactionService.getVideoReactions();
     const activitiesData = _activitiesData.filter(t => t.videoId === videoId);
     const authorsData = userService.getUsers();
 
-    const results = ModelFactory.videoActivityResourceToVideoActivity(
+    const results = ModelFactory.videoReactionResourceToVideoReaction(
         activitiesData,
         videoResource,
         authorsData
@@ -141,47 +140,45 @@ app.get('/videos/:videoId/activity', (req, res) => {
 });
 
 
-app.post('/videos/:videoId/activity', (req, res) => {
+app.post('/videos/:videoId/reactions', (req, res) => {
 
     const videoId = req.params.videoId;
-    const requestItem = req.body as VideoActivityPostRequest;
+    const requestItem = req.body as VideoReactionPostRequest;
 
     const videoResources = videoService.getVideos();
     const videoResource = videoResources.find(t => t.id === videoId);
 
-    if (!videoResource) {
+    if ( !videoResource ) {
         res.status(404).send();
         return;
     }
 
-    const _activitiesData = videoActivityService.getVideoActivities();
-    const activitiesData = _activitiesData.filter(t => t.videoId === videoId);
-    const authorsData = userService.getUsers();
+    if ( videoResource.authorId !== LOGGED_IN_USER.id ) {
+        res.status(403).send();
+        return;
+    }
 
-    const authorResource = authorsData.find( t => t.id == requestItem.authorId )!;
-    const author = new User(
-        authorResource.id,
-        authorResource.name,
-        authorResource.pictureUrl
-    );
-    
-    let resourceItem: VideoActivityResource;
+    let resourceItem: VideoReactionResource;
 
     try {
-        resourceItem = ResourceFactory.buildVideoActivityResource(
+        resourceItem = ResourceFactory.buildVideoReactionResource(
             requestItem,
             videoResource,
-            author
+            LOGGED_IN_USER
         );
     } catch (e) {
         res.status(400).send((e as Error).message);
         return;
     }
 
-    activitiesData.push(resourceItem);
-    videoActivityService.saveVideoAcivity(activitiesData);
+    const _activitiesData = videoReactionService.getVideoReactions();
+    const activitiesData = _activitiesData.filter(t => t.videoId === videoId);
+    const authorsData = userService.getUsers();
 
-    const results = ModelFactory.videoActivityResourceToVideoActivity(
+    activitiesData.push(resourceItem);
+    videoReactionService.saveVideoReaction(activitiesData);
+
+    const results = ModelFactory.videoReactionResourceToVideoReaction(
         activitiesData,
         videoResource,
         authorsData

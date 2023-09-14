@@ -1,27 +1,35 @@
 import { User } from "./user";
 import { Video } from "./video";
 
-export interface VideoActivity {
+export enum VideoReactionType {
+    star = 'star',
+    snapshot = 'snapshot'
+}
+
+export interface VideoReaction {
     id: string;
     video: Video;
     author: User;
+    timeframe: number;
+    type: VideoReactionType;
 }
 
-export class VideoActivityLike implements VideoActivity {
+export class VideoReactionStar implements VideoReaction {
 
-    public readonly type = 'like';
+    public readonly type = VideoReactionType.star;
 
     constructor(
         public readonly id: string,
         public readonly video: Video,
         public readonly author: User,
-        public readonly postedDate: string
+        public readonly postedDate: string,
+        public readonly timeframe: number
     ) {}
 }
 
-export class VideoActivitySnapshot implements VideoActivity {
+export class VideoReactionSnapshot implements VideoReaction {
 
-    public readonly type = 'snapshot';
+    public readonly type = VideoReactionType.snapshot;
 
     constructor(
         public readonly id: string,

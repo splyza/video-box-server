@@ -1,34 +1,35 @@
 import { createImageFromDataUrl } from "./helpers";
 import { User } from "./models/user";
-import { VideoActivityPostRequest, VideoActivitySnapshotRequest } from "./requests/video-activity-post";
+import { VideoReactionType } from "./models/video-reaction";
+import { VideoReactionPostRequest, VideoReactionSnapshotRequest } from "./requests/video-reaction-post";
 import { VideoResource } from "./resources/video";
-import { VideoActivityResource, VideoActivityLikeResource, VideoActivitySnapshotResource } from "./resources/video-activity";
+import { VideoReactionResource, VideoReactionStarResource, VideoReactionSnapshotResource } from "./resources/video-reaction";
 
 class ResourceFactory {
 
-    public buildVideoActivityResource(
-        requestItem: VideoActivityPostRequest,
+    public buildVideoReactionResource(
+        requestItem: VideoReactionPostRequest,
         videoResource: VideoResource,
         author: User
-    ): VideoActivityResource {
+    ): VideoReactionResource {
         const uuid = crypto.randomUUID() as string;
-        let resourceItem: VideoActivityResource;
-        if ( requestItem.type === 'like' ) {
-            resourceItem = <VideoActivityLikeResource>{
+        let resourceItem: VideoReactionResource;
+        if ( requestItem.type === VideoReactionType.star ) {
+            resourceItem = <VideoReactionStarResource>{
                 "id": uuid,
                 "videoId": videoResource.id,
                 "authorId": author.id,
-                "type": "like",
+                "type": VideoReactionType.star,
                 "postedDate": (new Date()).toISOString()
             };
         } else {
-            const snapReq = requestItem as VideoActivitySnapshotRequest;
+            const snapReq = requestItem as VideoReactionSnapshotRequest;
             const imageUrl = createImageFromDataUrl(snapReq.dataUri, uuid);
-            resourceItem = <VideoActivitySnapshotResource>{
+            resourceItem = <VideoReactionSnapshotResource>{
                 "id": uuid,
                 "videoId": videoResource.id,
                 "authorId": author.id,
-                "type": "snapshot",
+                "type": VideoReactionType.snapshot,
                 "createdDate": (new Date()).toISOString(),
                 "timeframe": snapReq.timeframe,
                 "imageUrl": imageUrl
