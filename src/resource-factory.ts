@@ -4,6 +4,7 @@ import { VideoReactionType } from "./models/video-reaction";
 import { VideoReactionPostRequest, VideoReactionSnapshotRequest } from "./requests/video-reaction-post";
 import { VideoResource } from "./resources/video";
 import { VideoReactionResource, VideoReactionStarResource, VideoReactionSnapshotResource } from "./resources/video-reaction";
+import * as crypto from "crypto";
 
 class ResourceFactory {
 

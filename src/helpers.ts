@@ -15,7 +15,7 @@ export function createImageFromDataUrl(dataUri: string, fileName: string): strin
         throw new Error('dataUri is empty');
     }
     var buf = Buffer.from(data, 'base64'); 
-    const pathRoot = path.join(__dirname, '../public/images/reaction');
+    const pathRoot = path.join(__dirname, '../public/images/reactions');
     const fullPath = `${pathRoot}/${fileName}.png`;
     fs.writeFileSync(fullPath, buf);
     return `images/reaction/${fileName}.png`;
