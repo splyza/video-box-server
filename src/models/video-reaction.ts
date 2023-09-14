@@ -40,3 +40,33 @@ export class VideoReactionSnapshot implements VideoReaction {
         public readonly imageUrl: string
     ) {}
 }
+
+export type VideoReactionPreview = Omit<VideoReaction, 'video'> & {videoId: string};
+
+
+export class VideoReactionPreviewStar implements VideoReactionPreview {
+
+    public readonly type = VideoReactionType.star;
+
+    constructor(
+        public readonly id: string,
+        public readonly videoId: string,
+        public readonly author: User,
+        public readonly postedDate: string,
+        public readonly timeframe: number
+    ) {}
+}
+
+export class VideoReactionPreviewSnapshot implements VideoReactionPreview {
+
+    public readonly type = VideoReactionType.snapshot;
+
+    constructor(
+        public readonly id: string,
+        public readonly videoId: string,
+        public readonly author: User,
+        public readonly createdDate: string,
+        public readonly timeframe: number,
+        public readonly imageUrl: string
+    ) {}
+}

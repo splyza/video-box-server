@@ -130,7 +130,7 @@ app.get('/videos/:videoId/reactions', (req, res) => {
     const activitiesData = _activitiesData.filter(t => t.videoId === videoId);
     const authorsData = userService.getUsers();
 
-    const results = ModelFactory.videoReactionResourceToVideoReaction(
+    const results = ModelFactory.videoReactionResourceToVideoReactionPreview(
         activitiesData,
         videoResource,
         authorsData
@@ -178,7 +178,7 @@ app.post('/videos/:videoId/reactions', (req, res) => {
     activitiesData.push(resourceItem);
     videoReactionService.saveVideoReaction(activitiesData);
 
-    const results = ModelFactory.videoReactionResourceToVideoReaction(
+    const results = ModelFactory.videoReactionResourceToVideoReactionPreview(
         activitiesData,
         videoResource,
         authorsData

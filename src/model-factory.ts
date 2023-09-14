@@ -2,18 +2,18 @@ import { LOGGED_IN_USER } from "./config";
 import { UserDbService } from "./db/users-db-service";
 import { User } from "./models/user";
 import { Video } from "./models/video";
-import { VideoReaction, VideoReactionStar, VideoReactionSnapshot, VideoReactionType } from "./models/video-reaction";
+import { VideoReactionType, VideoReactionPreview, VideoReactionPreviewSnapshot, VideoReactionPreviewStar } from "./models/video-reaction";
 import { UserResource } from "./resources/user";
 import { VideoResource } from "./resources/video";
 import { VideoReactionResource, VideoReactionStarResource, VideoReactionSnapshotResource } from "./resources/video-reaction";
 
 class ModelFactory {
 
-    public videoReactionResourceToVideoReaction(
+    public videoReactionResourceToVideoReactionPreview(
         activitiesData: Array<VideoReactionResource>,
         videoData: VideoResource,
         authorsData: Array<UserResource>
-    ): Array<VideoReaction> {
+    ): Array<VideoReactionPreview> {
         const video = new Video(
             videoData.id,
             videoData.title,
@@ -23,7 +23,7 @@ class ModelFactory {
             videoData.url
         );
     
-        const results = new Array<VideoReaction>();
+        const results = new Array<VideoReactionPreview>();
         for ( let item of activitiesData ) {
             const authorResource = authorsData.find( t => t.id == item.authorId )!;
             const author = new User(
@@ -33,18 +33,18 @@ class ModelFactory {
             )
             if ( item.type === VideoReactionType.star ) {
                 const star = item as VideoReactionStarResource;
-                results.push(new VideoReactionStar(
+                results.push(new VideoReactionPreviewStar(
                     star!.id,
-                    video,
+                    video.id,
                     author,
                     star!.postedDate,
                     star!.timeframe
                 ));
             } else {
                 const snapshot = item as VideoReactionSnapshotResource;
-                results.push(new VideoReactionSnapshot(
+                results.push(new VideoReactionPreviewSnapshot(
                     snapshot.id,
-                    video,
+                    video.id,
                     author,
                     snapshot.createdDate,
                     snapshot.timeframe,
