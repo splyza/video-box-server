@@ -30,7 +30,7 @@ by default it runs on ```localhost:3000```
 # REST API Documentation
 
 ### Get current logged in user
-```GET /users/self```
+```GET /api/users/self```
 
 The system asumes that the user is already logged in, so it will always return the same user.
 
@@ -45,7 +45,7 @@ response:
 ```
 
 ### Get the list of videos
-```GET /videos```
+```GET /api/videos```
 
 response json:
 ```
@@ -58,7 +58,7 @@ response json:
 ```
 
 ### Get the details of a particular video
-```GET /videos/:videoId```
+```GET /api/videos/:videoId```
 
 response json:
 ```
@@ -73,7 +73,7 @@ response json:
 ```
 
 ### Update video properties
-```PATCH /videos/:videoId```
+```PATCH /api/videos/:videoId```
 
 (body) json payload:
 ```
@@ -96,7 +96,7 @@ response:
 ```
 
 ### Get video reactions
-``` GET /videos/:videoId/reactions ```
+``` GET /api/videos/:videoId/reactions ```
 
 response:
 ```
@@ -119,7 +119,7 @@ response:
 ```
 
 ### Add new video reaction to an existing video
-``` POST /videos/:videoId/reactions ```
+``` POST /api/videos/:videoId/reactions ```
 
 (body) json payload:
 ```
