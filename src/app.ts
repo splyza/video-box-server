@@ -84,8 +84,13 @@ app.patch('/videos/:videoId', (req, res) => {
     const foundIndex = videosData.findIndex(t => t.id === videoId);
     const videoResource = videosData[foundIndex];
 
-    if (!videoResource) {
+    if ( !videoResource ) {
         res.status(404).send();
+        return;
+    }
+
+    if ( videoResource.authorId !== LOGGED_IN_USER.id ) {
+        res.status(403).send();
         return;
     }
 
