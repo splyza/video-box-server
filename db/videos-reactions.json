@@ -1,54 +1,37 @@
 [
-    {
-      "id": "va00001",
-      "videoId": "aaaaa1",
-      "authorId": "xxxxx2",
-      "type": "star",
-      "postedDate": "2022-08-05T14:48:00.000Z",
-      "timeframe": 0.166667
-    },
-    {
-      "id": "va00002",
-      "videoId": "aaaaa1",
-      "authorId": "xxxxx2",
-      "type": "snapshot",
-      "createdDate": "2022-06-05T14:48:00.000Z",
-      "timeframe": 0.166667,
-      "imageUrl": "images/reactions/va00002.png"
-    },
-    {
-      "id": "va00003",
-      "videoId": "aaaaa1",
-      "authorId": "xxxxx3",
-      "type": "snapshot",
-      "createdDate": "2022-04-05T14:48:00.000Z",
-      "timeframe": 0.21,
-      "imageUrl": "images/reactions/va00003.png"
-    },
-    {
-      "id": "va00004",
-      "videoId": "aaaaa1",
-      "authorId": "xxxxx3",
-      "type": "snapshot",
-      "createdDate": "2022-04-05T14:48:00.000Z",
-      "timeframe": 0.3,
-      "imageUrl": "images/reactions/va00003.png"
-    },
-    {
-      "id": "va00005",
-      "videoId": "aaaaa2",
-      "authorId": "xxxxx0",
-      "type": "star",
-      "postedDate": "2022-08-05T14:48:00.000Z",
-      "timeframe": 0.166667
-    },
-    {
-      "id": "va00006",
-      "videoId": "aaaaa2",
-      "authorId": "xxxxx3",
-      "type": "snapshot",
-      "createdDate": "2022-06-05T14:48:00.000Z",
-      "timeframe": 0.166667,
-      "imageUrl": "images/reactions/va00002.png"
-    }
-  ]
+  {
+    "id": "va00001",
+    "videoId": "aaaaa1",
+    "authorId": "xxxxx2",
+    "type": "star",
+    "postedDate": "2022-08-05T14:48:00.000Z",
+    "timeframe": 0.166667
+  },
+  {
+    "id": "va00002",
+    "videoId": "aaaaa1",
+    "authorId": "xxxxx2",
+    "type": "snapshot",
+    "createdDate": "2022-06-05T14:48:00.000Z",
+    "timeframe": 0.166667,
+    "imageUrl": "images/reactions/va00002.png"
+  },
+  {
+    "id": "va00003",
+    "videoId": "aaaaa1",
+    "authorId": "xxxxx3",
+    "type": "snapshot",
+    "createdDate": "2022-04-05T14:48:00.000Z",
+    "timeframe": 0.21,
+    "imageUrl": "images/reactions/va00003.png"
+  },
+  {
+    "id": "va00004",
+    "videoId": "aaaaa1",
+    "authorId": "xxxxx3",
+    "type": "snapshot",
+    "createdDate": "2022-04-05T14:48:00.000Z",
+    "timeframe": 0.3,
+    "imageUrl": "images/reactions/va00003.png"
+  }
+]

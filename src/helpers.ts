@@ -14,11 +14,12 @@ export function createImageFromDataUrl(dataUri: string, fileName: string): strin
     if ( data.trim() === '' ) {
         throw new Error('dataUri is empty');
     }
+    const subPath = 'images/reactions';
     var buf = Buffer.from(data, 'base64'); 
-    const pathRoot = path.join(__dirname, '../public/images/reactions');
+    const pathRoot = path.join(__dirname, `../public/${subPath}`);
     const fullPath = `${pathRoot}/${fileName}.png`;
     fs.writeFileSync(fullPath, buf);
-    return `images/reaction/${fileName}.png`;
+    return `${subPath}/${fileName}.png`;
 }
 
 export function simulateDelay(callback: Function) {
