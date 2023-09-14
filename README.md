@@ -19,6 +19,14 @@ Local RESP API service for testing. It returns mockup data.
 
 by default it runs on ```localhost:3000```
 
+# Observations
+
+- The server doesn't support login
+- The API's are not authenticated. So, you don't need to handle authentication.
+- The server was set up to load a predefined user session. The default user is "Tanaka Shigeru". All the API calls are running under this user's context.
+- The server includes a small database which is already populated with some mockup data. The db contains all the data needed for completing the challenge.
+
+
 # REST API Documentation
 
 ### Get current logged in user
