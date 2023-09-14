@@ -141,11 +141,6 @@ router.post('/videos/:videoId/reactions', (req, res) => {
         return;
     }
 
-    if ( videoResource.authorId !== LOGGED_IN_USER.id ) {
-        res.status(403).send();
-        return;
-    }
-
     let resourceItem: VideoReactionResource;
 
     try {
