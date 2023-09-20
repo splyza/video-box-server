@@ -53,7 +53,8 @@ response json:
   id: string,
   title: string,
   createdDate: string, // iso date string
-  author: User
+  author: User,
+  previewUrl: string
 }]
 ```
 
@@ -68,7 +69,8 @@ response json:
   description: string,
   createdDate: string, // iso date string
   author: User,
-  url: string
+  url: string,
+  previewUrl: string
 }
 ```
 

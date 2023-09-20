@@ -31,7 +31,8 @@ router.get('/videos', (req, res) => {
             id: item.id,
             title: item.title,
             createdDate: item.createdDate,
-            author: LOGGED_IN_USER
+            author: LOGGED_IN_USER,
+            previewUrl: item.previewUrl
         });
     }
 

@@ -6,4 +6,5 @@ export interface VideoResource {
     createdDate: string;
     authorId: string;
     url: string;
+    previewUrl: string;
 }

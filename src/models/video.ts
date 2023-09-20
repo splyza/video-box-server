@@ -7,7 +7,8 @@ export class Video {
         public readonly description: string,
         public readonly createdDate: string,
         public readonly author: User,
-        public readonly url: string
+        public readonly url: string,
+        public readonly previewUrl: string
     ) {
         // ..
     }

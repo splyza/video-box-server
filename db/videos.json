@@ -5,7 +5,8 @@
     "description": "Some video",
     "createdDate": "2022-10-05T14:48:00.000Z",
     "authorId": "xxxxx0",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa2",
@@ -13,7 +14,8 @@
     "description": "",
     "createdDate": "2022-08-05T14:48:00.000Z",
     "authorId": "xxxxx2",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa3",
@@ -21,7 +23,8 @@
     "description": "cccccc",
     "createdDate": "2022-07-05T14:48:00.000Z",
     "authorId": "xxxxx0",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa4",
@@ -29,7 +32,8 @@
     "description": "ddddddd",
     "createdDate": "2022-05-05T14:48:00.000Z",
     "authorId": "xxxxx0",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa5",
@@ -37,7 +41,8 @@
     "description": "eeeeee",
     "createdDate": "2022-04-05T14:48:00.000Z",
     "authorId": "xxxxx2",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa6",
@@ -45,7 +50,8 @@
     "description": "fffffffff",
     "createdDate": "2022-03-05T14:48:00.000Z",
     "authorId": "xxxxx0",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa7",
@@ -53,7 +59,8 @@
     "description": "gg",
     "createdDate": "2022-02-05T14:48:00.000Z",
     "authorId": "xxxxx0",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   },
   {
     "id": "aaaaa8",
@@ -61,6 +68,7 @@
     "description": "sdfdsxxx",
     "createdDate": "2021-08-05T14:48:00.000Z",
     "authorId": "xxxxx3",
-    "url": "videos/small.mp4"
+    "url": "videos/small.mp4",
+    "previewUrl": "images/video-preview.png"
   }
 ]

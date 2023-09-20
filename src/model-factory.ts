@@ -20,7 +20,8 @@ class ModelFactory {
             videoData.description,
             videoData.createdDate,
             LOGGED_IN_USER,
-            videoData.url
+            videoData.url,
+            videoData.previewUrl
         );
     
         const results = new Array<VideoReactionPreview>();
@@ -67,7 +68,8 @@ class ModelFactory {
             resource.description,
             resource.createdDate,
             author,
-            resource.url
+            resource.url,
+            resource.previewUrl
         )
     }
 
