@@ -21,7 +21,8 @@ class ResourceFactory {
                 "videoId": videoResource.id,
                 "authorId": author.id,
                 "type": VideoReactionType.star,
-                "postedDate": (new Date()).toISOString()
+                "postedDate": (new Date()).toISOString(),
+                "timeframe": requestItem.timeframe
             };
         } else {
             const snapReq = requestItem as VideoReactionSnapshotRequest;
