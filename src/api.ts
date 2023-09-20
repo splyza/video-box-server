@@ -24,14 +24,16 @@ router.get('/users/self', (req, res) => {
 router.get('/videos', (req, res) => {
 
     const videoResources = videoService.getVideos();
+    const usersResources = userService.getUsers();
     const results = new Array<VideoPreview>();
 
     for ( let item of videoResources ) {
+        const foundUser = usersResources.find(t => t.id == item.authorId)!;
         results.push({
             id: item.id,
             title: item.title,
             createdDate: item.createdDate,
-            author: LOGGED_IN_USER,
+            author: foundUser,
             previewUrl: item.previewUrl
         });
     }
