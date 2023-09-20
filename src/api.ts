@@ -157,15 +157,15 @@ router.post('/videos/:videoId/reactions', (req, res) => {
         return;
     }
 
-    const _activitiesData = videoReactionService.getVideoReactions();
-    const activitiesData = _activitiesData.filter(t => t.videoId === videoId);
+    const activitiesData = videoReactionService.getVideoReactions();
     const authorsData = userService.getUsers();
 
     activitiesData.push(resourceItem);
     videoReactionService.saveVideoReaction(activitiesData);
 
+    const filteredActivities = activitiesData.filter(t => t.videoId === videoId);
     const results = ModelFactory.videoReactionResourceToVideoReactionPreview(
-        activitiesData,
+        filteredActivities,
         videoResource,
         authorsData
     );
