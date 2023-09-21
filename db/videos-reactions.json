@@ -14,7 +14,7 @@
     "type": "snapshot",
     "createdDate": "2022-06-05T14:48:00.000Z",
     "timeframe": 0.166667,
-    "imageUrl": "images/reactions/va00002.png"
+    "imageUrl": "http://localhost:3000/images/reactions/va00002.png"
   },
   {
     "id": "va00003",
@@ -23,7 +23,7 @@
     "type": "snapshot",
     "createdDate": "2022-04-05T14:48:00.000Z",
     "timeframe": 0.21,
-    "imageUrl": "images/reactions/va00003.png"
+    "imageUrl": "http://localhost:3000/images/reactions/va00003.png"
   },
   {
     "id": "va00004",
@@ -32,6 +32,6 @@
     "type": "snapshot",
     "createdDate": "2022-04-05T14:48:00.000Z",
     "timeframe": 0.3,
-    "imageUrl": "images/reactions/va00003.png"
+    "imageUrl": "http://localhost:3000/images/reactions/va00003.png"
   }
 ]

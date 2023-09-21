@@ -1,3 +1,4 @@
+import { PORT } from "./config";
 import { createImageFromDataUrl } from "./helpers";
 import { User } from "./models/user";
 import { VideoReactionType } from "./models/video-reaction";
@@ -26,7 +27,7 @@ class ResourceFactory {
             };
         } else {
             const snapReq = requestItem as VideoReactionSnapshotRequest;
-            const imageUrl = createImageFromDataUrl(snapReq.dataUri, uuid);
+            const imageUrl = `http://localhost:${PORT}/` + createImageFromDataUrl(snapReq.dataUri, uuid);
             resourceItem = <VideoReactionSnapshotResource>{
                 "id": uuid,
                 "videoId": videoResource.id,
